@@ -1,0 +1,24 @@
+GET http://localhost:8080/produto/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/produto
+Accept: application/json
+
+###
+
+POST http://localhost:8080/produto
+Content-Type: application/json
+
+{
+  "id" : 2,
+  "nome" : "Produto 2",
+  "descricao" : "Produto 2",
+  "fotoUrl" : "Foto do Produto 2",
+  "dataCadastro" : "2021-01-19 03:14:07",
+  "dataUltimaAtualizacao" : "2021-23-19 15:00:00",
+  "valorUnitario" : 10.89
+}
+
+###
