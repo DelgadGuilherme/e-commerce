@@ -3,6 +3,7 @@ package br.com.uvass.ecommerce.model.repository;
 import br.com.uvass.ecommerce.model.entity.Produto;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoRepository {
@@ -38,5 +39,31 @@ public class ProdutoRepository {
         String sql = "SELECT * FROM produto WHERE id=?";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProdutoMapper());
+    }
+
+    public List<Produto> buscarPorNomeFaixaValor(String nome, String valorMinimo, String valorMaximo) {
+        String sql = "SELECT * FROM produto WHERE";
+        List<Object> listObject = new ArrayList<Object>();
+
+        if (nome != null && nome != " "){
+            sql += " nome = ?";
+           listObject.add(nome);
+        }
+
+        if (valorMaximo != null && valorMinimo != null && valorMaximo != " " && valorMinimo != " " && nome != null && nome != " "){
+            sql += " AND valorUnitario BETWEEN ? AND ?";
+            listObject.add(Integer.parseInt(valorMinimo));
+            listObject.add(Integer.parseInt(valorMaximo));
+        }
+
+        if (valorMaximo != null && valorMinimo != null && valorMaximo != " " && valorMinimo != " " && nome == null) {
+            sql += " valorUnitario BETWEEN ? AND ?";
+            listObject.add(Integer.parseInt(valorMinimo));
+            listObject.add(Integer.parseInt(valorMaximo));
+        }
+
+        Object[] objeto = listObject.toArray(new Object[]{});
+
+        return jdbcTemplate.query(sql, objeto, new ProdutoMapper());
     }
 }

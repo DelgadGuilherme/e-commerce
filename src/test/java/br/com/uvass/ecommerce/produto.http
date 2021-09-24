@@ -2,13 +2,13 @@ POST http://localhost:8080/produto
 Content-Type: application/json
 
 {
-  "id" : 2,
-  "nome" : "Produto 2",
+  "id" : 1,
+  "nome" : "Produto1",
   "descricao" : "Produto 2",
-  "fotoUrl" : "Foto do Produto 2",
+  "fotoUrl" : "Foto do Produto 1",
   "dataCadastro" : "2021-01-19 03:14:07",
   "dataUltimaAtualizacao" : "2021-23-19 15:00:00",
-  "valorUnitario" : 10.89
+  "valorUnitario" : 11.00
 }
 
 ###
@@ -18,9 +18,17 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/produto
+GET http://localhost:8080/produto?nome=Produto1
 Accept: application/json
 
 ###
 
+GET http://localhost:8080/produto?valorMinimo=9&valorMaximo=12
+Accept: application/json
 
+###
+
+GET http://localhost:8080/produto?nome=Produto1&valorMinimo=9&valorMaximo=12
+Accept: application/json
+
+###

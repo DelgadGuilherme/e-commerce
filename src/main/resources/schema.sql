@@ -12,8 +12,7 @@ CREATE TABLE  produto (
     fotoUrl VARCHAR(90),
     dataCadastro VARCHAR(30),
     dataUltimaAtualizacao VARCHAR(30),
-    valorUnitario FLOAT,
-    categoria_id INT
+    valorUnitario FLOAT
 );
 
 CREATE TABLE produtoCategoria (

@@ -19,11 +19,13 @@ public class ProdutoController {
         produtoRepository = new ProdutoRepository(jdbcTemplate);
     }
 
+    /*
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<Produto> listarTodos() {
         return produtoRepository.listaTodos();
     }
+     */
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -35,5 +37,11 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public Produto buscarPorId(@PathVariable int id){
         return produtoRepository.buscarPorId(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping()
+    public List<Produto> buscarProdutoPorNomeFaixaValor(@RequestParam(required = false) String nome, String valorMinimo, String valorMaximo) {
+        return produtoRepository.buscarPorNomeFaixaValor(nome, valorMinimo, valorMaximo);
     }
 }
