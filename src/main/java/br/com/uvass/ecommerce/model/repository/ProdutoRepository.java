@@ -1,9 +1,13 @@
 package br.com.uvass.ecommerce.model.repository;
 
+import br.com.uvass.ecommerce.model.entity.Categoria;
 import br.com.uvass.ecommerce.model.entity.Produto;
+import br.com.uvass.ecommerce.model.entity.Promocao;
+import br.com.uvass.ecommerce.model.entity.PromocaoItem;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProdutoRepository {
@@ -35,10 +39,22 @@ public class ProdutoRepository {
         } throw new Exception("O produto não foi cadastrado");
     }
 
-    public Produto buscarPorId(int id) {
-        String sql = "SELECT * FROM produto WHERE id=?";
+    public HashMap buscarPorId(int id)  {
+        HashMap hashMap = new HashMap();
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProdutoMapper());
+        Produto produto =  jdbcTemplate.queryForObject("SELECT * FROM produto WHERE id=?", new Object[]{id}, new ProdutoMapper());
+        hashMap.put("Produto", produto);
+
+        List<Categoria> categoria = jdbcTemplate.query("SELECT c.* FROM categoria c JOIN produtoCategoria e ON e.categoria_id = c.id JOIN produto p ON p.id = e.produto_id WHERE p.id = ?", new Object[]{id}, new CategoriaMapper());
+        hashMap.put("Categoria", categoria);
+
+        List<PromocaoItem> promocaoItem = jdbcTemplate.query("SELECT i.* FROM promocaoItem i JOIN produto p ON p.id = i.produto_id WHERE p.id = ?", new Object[]{id}, new PromocaoItemMapper());
+        hashMap.put("PromocaoItem", promocaoItem);
+
+        List<Promocao> promocao = jdbcTemplate.query("SELECT r.* FROM promocao r JOIN promocaoItem i ON i.promocao_id = r.id JOIN produto p ON p.id = i.produto_id WHERE p.id = ?", new Object[]{id}, new PromocaoMapper());
+        hashMap.put("Promocao", promocao);
+
+        return hashMap;
     }
 
     public List<Produto> buscarPorNomeFaixaValor(String nome, String valorMinimo, String valorMaximo) {

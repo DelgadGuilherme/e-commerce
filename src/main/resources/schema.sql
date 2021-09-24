@@ -20,3 +20,22 @@ CREATE TABLE produtoCategoria (
     produto_id INT,
     categoria_id INT
 );
+
+CREATE TABLE promocaoItem (
+    id INT NOT NULL,
+    valorPromocao FLOAT,
+    dataCadastro VARCHAR(45),
+    dataUltimaAtualizacao VARCHAR(45),
+    produto_id INT,
+    promocao_id INT
+);
+
+CREATE TABLE promocao (
+    id INT NOT NULL,
+    nome VARCHAR(90),
+    descricao VARCHAR(100),
+    dataInicio VARCHAR(30),
+    dataFim VARCHAR(30),
+    dataCadastro VARCHAR(45),
+    dataUltimaAtualizacao VARCHAR(45)
+)

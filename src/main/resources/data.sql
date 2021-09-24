@@ -21,3 +21,9 @@ VALUES(1, 3, 1);
 
 INSERT INTO produtoCategoria (id, produto_id, categoria_id)
 VALUES(1, 2, 2);
+
+INSERT INTO promocao (id, nome, descricao, dataInicio, dataFim, dataCadastro, dataUltimaAtualizacao)
+VALUES(1, 'Promocao 1', 'descricao da promocao 1', '2021-01-19 03:14:07', '2021-01-19 03:14:07', '2021-01-19 03:14:07', '2021-01-19 03:14:07');
+
+INSERT INTO promocaoItem (id, valorPromocao, dataCadastro, dataUltimaAtualizacao, produto_id, promocao_id)
+VALUES (1, 10.00, '2021-01-19 03:14:07', '2021-01-19 03:14:07', 1, 1);
